@@ -20,7 +20,7 @@ const HACKATHON_API_KEY = process.env.HACKATHON_API_KEY || "my_secret_hackathon_
 const groq = new Groq({ apiKey: GROQ_API_KEY });
 
 const pool = new Pool({
-connectionString: process.env.DATABASE_URL,
+connectionString: "postgresql://postgres.oamomaocmwqwdoropejd:KapilGautam2026@aws-0-ap-south-1.pooler.supabase.com:6543/postgres",
     ssl: { rejectUnauthorized: false }
 });
 
@@ -249,6 +249,7 @@ setInterval(() => {
     if (myUrl.includes("YOUR-APP-NAME")) return; 
     https.get(myUrl, (res) => {}).on('error', (e) => console.error("Ping Error:", e.message));
 }, 840000);
+
 
 
 
