@@ -1,5 +1,5 @@
 require('dotenv').config(); 
-
+require('dns').setDefaultResultOrder('ipv4first');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
