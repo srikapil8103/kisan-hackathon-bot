@@ -118,9 +118,6 @@ function extractIntelFromText(txt) {
 // ==========================================
 // 🧠 MAIN CHAT AGENT
 // ==========================================
-// ==========================================
-// 🧠 MAIN CHAT AGENT (Fixed Request Body)
-// ==========================================
 app.post('/api/chat', async (req, res) => {
     const incomingKey = req.headers['x-api-key'];
     if (incomingKey && incomingKey !== HACKATHON_API_KEY) {
@@ -129,24 +126,10 @@ app.post('/api/chat', async (req, res) => {
 
     try {
         const { message, conversationHistory } = req.body;
-        
-        // 🛠️ FIX: Agar message string hai ya object, dono ko handle karega
-        let txt = "";
-        if (typeof message === 'object' && message !== null) {
-            txt = message.text || "";
-        } else {
-            txt = message || "";
-        }
-
-        // Agar message khali hai to error return karega
-        if (!txt) {
-            console.log("⚠️ Invalid Request Body: Message is empty");
-            return res.status(400).json({ error: "INVALID_REQUEST_BODY" });
-        }
-
+        const txt = message?.text || "";
         const history = conversationHistory || [];
 
-        // 1. Data Extraction (Baaki poora logic waisa hi rahega)
+        // 1. Data Extraction
         let memory = { names: [], mobiles: [], accounts: [], ifscs: [], upis: [], links: [] };
         const allMessages = [...history, { sender: 'scammer', text: txt }];
 
@@ -266,8 +249,6 @@ setInterval(() => {
     if (myUrl.includes("YOUR-APP-NAME")) return; 
     https.get(myUrl, (res) => {}).on('error', (e) => console.error("Ping Error:", e.message));
 }, 840000);
-
-
 
 
 
