@@ -20,7 +20,7 @@ const HACKATHON_API_KEY = process.env.HACKATHON_API_KEY || "my_secret_hackathon_
 const groq = new Groq({ apiKey: GROQ_API_KEY });
 
 const pool = new Pool({
-connectionString: "postgresql://postgres.oamomaocmwqwdoropejd:KapilGautam2026@aws-0-ap-south-1.pooler.supabase.com:6543/postgres",
+    connectionString: "postgresql://neondb_owner:npg_7hti3UfsCNXz@ep-late-feather-a1xou2rw-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require",
     ssl: { rejectUnauthorized: false }
 });
 
@@ -249,11 +249,6 @@ setInterval(() => {
     if (myUrl.includes("YOUR-APP-NAME")) return; 
     https.get(myUrl, (res) => {}).on('error', (e) => console.error("Ping Error:", e.message));
 }, 840000);
-
-
-
-
-
 
 
 
