@@ -125,9 +125,19 @@ app.post('/api/chat', async (req, res) => {
     }
 
     try {
-        const { message, conversationHistory } = req.body;
-        const txt = message?.text || "";
-        const history = conversationHistory || [];
+      // --- लाइन 128 से शुरू करें ---
+const { message, conversationHistory } = req.body;
+
+// नया तरीका: अगर message एक object है तो उसका text लो, वरना सीधा message को ही text मान लो
+let txt = "";
+if (typeof message === 'object' && message !== null) {
+    txt = message.text || "";
+} else {
+    txt = message || "";
+}
+
+const history = conversationHistory || [];
+// --- यहाँ तक बदलें ---;
 
         // 1. Data Extraction
         let memory = { names: [], mobiles: [], accounts: [], ifscs: [], upis: [], links: [] };
@@ -249,6 +259,7 @@ setInterval(() => {
     if (myUrl.includes("YOUR-APP-NAME")) return; 
     https.get(myUrl, (res) => {}).on('error', (e) => console.error("Ping Error:", e.message));
 }, 840000);
+
 
 
 
